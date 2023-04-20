@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32106.194
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "shop_models", "shop_models\shop_models.csproj", "{22232CDC-D5D0-4BFA-8830-7F0CA031DBE5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "shop_models", "shop_models\shop_models.csproj", "{22232CDC-D5D0-4BFA-8830-7F0CA031DBE5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop_dblayer", "Shop_Dblayer\Shop_dblayer.csproj", "{7FC8FFEE-7BD1-470E-9B66-0E87E3DF627B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{22232CDC-D5D0-4BFA-8830-7F0CA031DBE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22232CDC-D5D0-4BFA-8830-7F0CA031DBE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22232CDC-D5D0-4BFA-8830-7F0CA031DBE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FC8FFEE-7BD1-470E-9B66-0E87E3DF627B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FC8FFEE-7BD1-470E-9B66-0E87E3DF627B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FC8FFEE-7BD1-470E-9B66-0E87E3DF627B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FC8FFEE-7BD1-470E-9B66-0E87E3DF627B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
