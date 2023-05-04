@@ -27,6 +27,5 @@ namespace Shop_dblayer
             ShopContext.Providers.Where(predicate).ToArray();
         public IEnumerable<Provider> GetProviders() =>
             GetProviders(x => true);
-        
     }
 }

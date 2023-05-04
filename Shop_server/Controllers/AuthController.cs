@@ -12,8 +12,11 @@ namespace Shop_server.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
+        private Guid Token => Guid.Parse(Request.Headers["Token"] != string.Empty ?
+            Request.Headers["Token"]! : Guid.Empty.ToString());
         private LocalAuthService _localAuthServerce = LocalAuthService.GetInstance();
 
+        [HttpPost]
         public IActionResult AuthPost(string login, string password)
         {
             try
