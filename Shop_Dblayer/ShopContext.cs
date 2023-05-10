@@ -15,6 +15,7 @@ namespace Shop_Dblayer
         public DbSet<Product> Products { get; set; }
         public DbSet<Provider> Providers { get; set; }
         public DbSet<Purchase> Purchases { get; set; }
+        public DbSet<Manager> Managers { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!File.Exists("db_setting.json"))

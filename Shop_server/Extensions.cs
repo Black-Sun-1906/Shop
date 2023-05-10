@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Shop_server
 {
-    internal static class Extentions
+    internal static class Extensions
     {
         public static string ComputeSHA256(string rawData)
         {

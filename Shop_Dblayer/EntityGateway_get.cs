@@ -21,11 +21,16 @@ namespace Shop_dblayer
         public IEnumerable<Client> GetClients(Func<Client, bool> predicate) =>
             ShopContext.Clients.Where(predicate).ToArray();
         public IEnumerable<Client> GetClients() =>
-            GetClients (x => true);
+            GetClients(x => true);
 
         public IEnumerable<Provider> GetProviders(Func<Provider, bool> predicate) =>
             ShopContext.Providers.Where(predicate).ToArray();
         public IEnumerable<Provider> GetProviders() =>
             GetProviders(x => true);
+
+        public IEnumerable<Manager> GetManagers(Func<Manager, bool> predicate) =>
+            ShopContext.Managers.Where(predicate).ToArray();
+        public IEnumerable<Manager> GetManagers() =>
+            GetManagers(x => true);
     }
 }

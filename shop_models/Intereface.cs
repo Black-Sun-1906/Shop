@@ -6,4 +6,10 @@ namespace shop_models
     {
         Guid Id { get; set; }
     }
+
+    public interface IAuth : IEntity
+    {
+        string Login { get; set; }
+        string Password { get; set; }
+    }
 }

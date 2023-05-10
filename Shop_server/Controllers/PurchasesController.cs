@@ -12,7 +12,7 @@ namespace Shop_server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ClientController : ControllerBase
+    public class PurchasesController : ControllerBase
     {
         private EntityGateway _db = new();
         private Guid Token => Guid.Parse(Request.Headers["Token"] != string.Empty ?
@@ -24,10 +24,10 @@ namespace Shop_server.Controllers
             Ok(new
             {
                 status = "ok",
-                clients = _db.GetClients()
+                purchases = _db.GetPurchases()
             });
         /// <summary>
-        /// Get clients by id
+        /// Get product name by id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -35,12 +35,12 @@ namespace Shop_server.Controllers
         [Route("{id}")]
         public IActionResult GetById(Guid id)
         {
-            var potentialTitle = _db.GetClients(x => x.Id == id).FirstOrDefault();
+            var potentialTitle = _db.GetPurchases(x => x.Id == id).FirstOrDefault();
             if (potentialTitle is not null)
                 return Ok(new
                 {
                     status = "ok",
-                    clients = potentialTitle
+                    purchas = potentialTitle
                 });
             else
                 return NotFound(new
@@ -49,12 +49,11 @@ namespace Shop_server.Controllers
                     message = $"There is no product with {id} id"
                 });
         }
-
         [HttpGet]
-        public IActionResult GetEmployeesClient(Guid id)
+        public IActionResult GetEmployeesPurchases(Guid id)
         {
-            var potentialClient = _db.GetClients(x => x.Id == id).FirstOrDefault();
-            return potentialClient is null ?
+            var potentialPurchas = _db.GetPurchases(x => x.Id == id).FirstOrDefault();
+            return potentialPurchas is null ?
                 NotFound(new
                 {
                     status = "fail",
@@ -63,7 +62,19 @@ namespace Shop_server.Controllers
             Ok(new
             {
                 status = "ok",
-                provider = potentialClient.Purchases
+                product = potentialPurchas.Products
+            });
+
+            return potentialPurchas is null ?
+                NotFound(new
+                {
+                    status = "fail",
+                    message = $"There is no product with {id} id"
+                }) :
+            Ok(new
+            {
+                status = "ok",
+                client = potentialPurchas.Client
             });
         }
     }

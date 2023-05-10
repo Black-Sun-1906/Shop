@@ -17,7 +17,7 @@ namespace Shop_server.Controllers
         private EntityGateway _db = new();
         private Guid Token => Guid.Parse(Request.Headers["Token"] != string.Empty ?
             Request.Headers["Token"]! : Guid.Empty.ToString());
-       
+
         [HttpGet]
         public IActionResult GetAll() =>
 
@@ -36,22 +36,25 @@ namespace Shop_server.Controllers
         public IActionResult GetById(Guid id)
         {
             var potentialTitle = _db.GetProducts(x => x.Id == id).FirstOrDefault();
-            if(potentialTitle is not null)
-            return Ok(new
-            {
-                status = "ok",
-                product = potentialTitle
-            });
-           else
-            return NotFound(new 
-            {
-            status = "fail",
-            message = $"There is no product with {id} id"
-            });
+            if (potentialTitle is not null)
+                return Ok(new
+                {
+                    status = "ok",
+                    product = potentialTitle
+                });
+            else
+                return NotFound(new
+                {
+                    status = "fail",
+                    message = $"There is no product with {id} id"
+                });
         }
+
+
+        [HttpPost]
         public IActionResult PostProduct([FromBody] Product product)
         {
-            if (LocalAuthService.GetInstance().GetRole(Token) != Role.Client)
+            if (!LocalAuthService.GetInstance().IsManager(Token))
                 return Unauthorized(new
                 {
                     status = "fail",
@@ -63,22 +66,6 @@ namespace Shop_server.Controllers
                 status = "ok",
                 id = product.Id
             });
-        }
-        public IActionResult GetEmployeesProduct (Guid id)
-        {
-            var potentialProduct = _db.GetProducts(x => x.Id == id).FirstOrDefault();
-            return potentialProduct is null ?
-                NotFound(new
-                {
-                    status = "fail",
-                    message = $"There is no product with {id} id"
-                }):
-            Ok(new
-            {
-                status = "ok",
-                provider = potentialProduct.Provider
-            });
-               
         }
     }
 }

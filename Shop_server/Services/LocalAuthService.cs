@@ -1,4 +1,5 @@
 ﻿using Shop_dblayer;
+using shop_models;
 using shop_models.Models;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace Shop_server.Servises
     {
         class Session
         {
-            public Client Client { get; set; }
+            public IAuth User { get; set; }
             public DateTime LastOp { get; set; }
             public Guid Token { get; set; }
             public bool IsAction => DateTime.Now - LastOp < TimeSpan.FromHours(1);
@@ -25,17 +26,24 @@ namespace Shop_server.Servises
 
         public Guid Auth(string login, string password)
         {
-            var passhash = Extentions.ComputeSHA256(password);
-            var potencialUser = _db.GetClients(x => x.Login == login & x.Password == passhash).FirstOrDefault() ?? throw new Exception("User is not found");
+            var passhash = Extensions.ComputeSHA256(password);
+            IAuth potencialUser = _db.GetClients(x => x.Login == login & x.Password == passhash).FirstOrDefault() as IAuth ?? _db.GetManagers(x => x.Login == login & x.Password == passhash).FirstOrDefault() as IAuth ?? throw new Exception("User is not found");
 
             var Token = Guid.NewGuid();
             Sessions.Add(new()
             {
                 LastOp = DateTime.Now,
                 Token = Token,
-                Client = potencialUser
+                User = potencialUser
             });
             return Token;
+        }
+
+        public bool IsManager(Guid token)
+        {
+            var potentialSession = Sessions.FirstOrDefault(x => x.Token == token) ?? throw new UnauthorizedAccessException("Session is not valied.");
+            potentialSession.LastOp = DateTime.Now;
+            return potentialSession.User is Manager;
         }
     }
 }

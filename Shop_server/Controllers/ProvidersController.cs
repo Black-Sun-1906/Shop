@@ -12,7 +12,7 @@ namespace Shop_server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ClientController : ControllerBase
+    public class ProvidersController : ControllerBase
     {
         private EntityGateway _db = new();
         private Guid Token => Guid.Parse(Request.Headers["Token"] != string.Empty ?
@@ -24,10 +24,10 @@ namespace Shop_server.Controllers
             Ok(new
             {
                 status = "ok",
-                clients = _db.GetClients()
+                product = _db.GetProviders()
             });
         /// <summary>
-        /// Get clients by id
+        /// Get product name by id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -35,12 +35,12 @@ namespace Shop_server.Controllers
         [Route("{id}")]
         public IActionResult GetById(Guid id)
         {
-            var potentialTitle = _db.GetClients(x => x.Id == id).FirstOrDefault();
+            var potentialTitle = _db.GetProviders(x => x.Id == id).FirstOrDefault();
             if (potentialTitle is not null)
                 return Ok(new
                 {
                     status = "ok",
-                    clients = potentialTitle
+                    provider = potentialTitle
                 });
             else
                 return NotFound(new
@@ -49,12 +49,11 @@ namespace Shop_server.Controllers
                     message = $"There is no product with {id} id"
                 });
         }
-
         [HttpGet]
-        public IActionResult GetEmployeesClient(Guid id)
+        public IActionResult GetEmployeesProviders(Guid id)
         {
-            var potentialClient = _db.GetClients(x => x.Id == id).FirstOrDefault();
-            return potentialClient is null ?
+            var potentialProvider = _db.GetProviders(x => x.Id == id).FirstOrDefault();
+            return potentialProvider is null ?
                 NotFound(new
                 {
                     status = "fail",
@@ -63,7 +62,7 @@ namespace Shop_server.Controllers
             Ok(new
             {
                 status = "ok",
-                provider = potentialClient.Purchases
+                products = potentialProvider.Products
             });
         }
     }
