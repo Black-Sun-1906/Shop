@@ -1,12 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Shop_dblayer;
-using shop_models.Models;
-using Shop_server.Servises;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Shop_server.Controllers
 {
@@ -50,7 +45,13 @@ namespace Shop_server.Controllers
                 });
         }
 
+        /// <summary>
+        /// Purchase search by id 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
+        [Route("{id}/purchases")]
         public IActionResult GetEmployeesClient(Guid id)
         {
             var potentialClient = _db.GetClients(x => x.Id == id).FirstOrDefault();

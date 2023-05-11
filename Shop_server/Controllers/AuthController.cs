@@ -43,7 +43,8 @@ namespace Shop_server.Controllers
                 throw;
             }
         }
-
+        [HttpPost]
+        [Route("signup")]
         public IActionResult SignUp([FromBody] JObject json)
         {
             try

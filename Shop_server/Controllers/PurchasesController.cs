@@ -1,12 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Shop_dblayer;
-using shop_models.Models;
-using Shop_server.Servises;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Shop_server.Controllers
 {
@@ -27,7 +22,7 @@ namespace Shop_server.Controllers
                 purchases = _db.GetPurchases()
             });
         /// <summary>
-        /// Get product name by id
+        /// Get purchase name by id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -49,8 +44,15 @@ namespace Shop_server.Controllers
                     message = $"There is no product with {id} id"
                 });
         }
+
+        /// <summary>
+        /// Client ahd product search by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
-        public IActionResult GetEmployeesPurchases(Guid id)
+        [Route("{id}/products")]
+        public IActionResult GetPurchasesProducts(Guid id)
         {
             var potentialPurchas = _db.GetPurchases(x => x.Id == id).FirstOrDefault();
             return potentialPurchas is null ?
@@ -63,18 +65,6 @@ namespace Shop_server.Controllers
             {
                 status = "ok",
                 product = potentialPurchas.Products
-            });
-
-            return potentialPurchas is null ?
-                NotFound(new
-                {
-                    status = "fail",
-                    message = $"There is no product with {id} id"
-                }) :
-            Ok(new
-            {
-                status = "ok",
-                client = potentialPurchas.Client
             });
         }
     }

@@ -1,12 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Shop_dblayer;
-using shop_models.Models;
-using Shop_server.Servises;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Shop_server.Controllers
 {
@@ -49,15 +44,22 @@ namespace Shop_server.Controllers
                     message = $"There is no product with {id} id"
                 });
         }
+
+        /// <summary>
+        /// Search for a product provider by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
-        public IActionResult GetEmployeesProviders(Guid id)
+        [Route("{id}/products")]
+        public IActionResult GetProvidersProducts(Guid id)
         {
             var potentialProvider = _db.GetProviders(x => x.Id == id).FirstOrDefault();
             return potentialProvider is null ?
                 NotFound(new
                 {
                     status = "fail",
-                    message = $"There is no product with {id} id"
+                    message = $"There is no provider with {id} id"
                 }) :
             Ok(new
             {

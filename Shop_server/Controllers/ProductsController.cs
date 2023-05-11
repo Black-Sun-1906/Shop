@@ -1,18 +1,15 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Shop_dblayer;
 using shop_models.Models;
 using Shop_server.Servises;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Shop_server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PductsController : ControllerBase
+    public class ProductsController : ControllerBase
     {
         private EntityGateway _db = new();
         private Guid Token => Guid.Parse(Request.Headers["Token"] != string.Empty ?
@@ -50,7 +47,11 @@ namespace Shop_server.Controllers
                 });
         }
 
-
+        /// <summary>
+        /// Registration verification
+        /// </summary>
+        /// <param name="product"></param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult PostProduct([FromBody] Product product)
         {

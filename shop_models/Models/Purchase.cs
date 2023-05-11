@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
 
 namespace shop_models.Models
 {
@@ -14,6 +15,7 @@ namespace shop_models.Models
         public DateTime Purchases { get; set; }
 
         public virtual Client Client { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Product> Products { get; set; }
     }
 }
