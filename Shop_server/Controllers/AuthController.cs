@@ -28,7 +28,7 @@ namespace Shop_server.Controllers
                 var token = _localAuthServerce.Auth(login, password);
                 return Ok(new
                 {
-                    status = "Ok",
+                    status = "ok",
                     token
                 });
 
@@ -43,6 +43,11 @@ namespace Shop_server.Controllers
                 throw;
             }
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="json">contains name, login, password</param>
+        /// <returns></returns>
         [HttpPost]
         [Route("signup")]
         public IActionResult SignUp([FromBody] JObject json)

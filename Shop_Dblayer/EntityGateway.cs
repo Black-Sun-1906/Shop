@@ -7,7 +7,7 @@ namespace Shop_dblayer
 {
     public partial class EntityGateway
     {
-        internal ShopContext ShopContext { get; set; }
+        internal ShopContext ShopContext { get; set; } = new ShopContext();
         public void AddOrUpdate (params IEntity[] entities)
         {
             var toAdd = entities.Where(x => x.Id == Guid.Empty);

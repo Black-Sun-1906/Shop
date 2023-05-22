@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Shop_dblayer;
+using Shop_server.Servises;
 using System;
 using System.Linq;
 
@@ -67,5 +68,24 @@ namespace Shop_server.Controllers
                 product = potentialPurchas.Products
             });
         }
+        /*
+       [HttpPost]
+        public IActionResult PostPurchases([FromBody] Purchases purchase)
+        {
+            if (!LocalAuthService.GetInstance().IsManager(Token))
+                return Unauthorized(new
+                {
+                    status = "fail",
+                    message = "You saved this product."
+                });
+            _db.AddOrUpdate(purchase);
+            return Ok(new
+            {
+                status = "ok",
+                id = purchase.Id
+            });
+        
+        }
+        */
     }
 }

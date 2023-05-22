@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Shop_server</name>
+    </assembly>
+    <members>
+        <member name="M:Shop_server.Controllers.AuthController.SignUp(Newtonsoft.Json.Linq.JObject)">
+            <summary>
+            
+            </summary>
+            <param name="json">contains name, login, password</param>
+            <returns></returns>
+        </member>
+        <member name="M:Shop_server.Controllers.ClientController.GetById(System.Guid)">
+            <summary>
+            Get clients by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Shop_server.Controllers.ClientController.GetEmployeesClient(System.Guid)">
+            <summary>
+            Purchase search by id 
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Shop_server.Controllers.ProductsController.GetById(System.Guid)">
+            <summary>
+            Get product name by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Shop_server.Controllers.ProductsController.PostProduct(shop_models.Models.Product)">
+            <summary>
+            Registration verification
+            </summary>
+            <param name="product"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Shop_server.Controllers.ProvidersController.GetById(System.Guid)">
+            <summary>
+            Get product name by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Shop_server.Controllers.ProvidersController.GetProvidersProducts(System.Guid)">
+            <summary>
+            Search for a product provider by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Shop_server.Controllers.PurchasesController.GetById(System.Guid)">
+            <summary>
+            Get purchase name by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Shop_server.Controllers.PurchasesController.GetPurchasesProducts(System.Guid)">
+            <summary>
+            Client ahd product search by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
