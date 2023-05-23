@@ -67,5 +67,13 @@
             <param name="id"></param>
             <returns></returns>
         </member>
+        <member name="M:Shop_server.Controllers.PurchasesController.PostPurchase(Newtonsoft.Json.Linq.JObject)">
+            <summary>
+            Save purchase
+            </summary>
+            <param name="purchaseJson"></param>
+            <param name="noteJson"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>

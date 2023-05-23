@@ -45,5 +45,10 @@ namespace Shop_server.Servises
             potentialSession.LastOp = DateTime.Now;
             return potentialSession.User is Manager;
         }
+
+        internal Client GetClient(Guid token)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

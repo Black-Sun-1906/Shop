@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 using Shop_dblayer;
+using shop_models.Models;
 using Shop_server.Servises;
 using System;
 using System.Linq;
@@ -68,24 +70,44 @@ namespace Shop_server.Controllers
                 product = potentialPurchas.Products
             });
         }
-        /*
-       [HttpPost]
-        public IActionResult PostPurchases([FromBody] Purchases purchase)
+
+
+        /// <summary>
+        /// Save purchase
+        /// </summary>
+        /// <param name="purchaseJson"></param>
+        /// <param name="noteJson"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public IActionResult PostPurchase([FromBody] JObject purchaseJson)
         {
-            if (!LocalAuthService.GetInstance().IsManager(Token))
-                return Unauthorized(new
+            try
+            {
+                Purchase purchase = purchaseJson.ToObject<Purchase>();
+                Client client;
+                if ((client = LocalAuthService.GetInstance().GetClient(Token)) is null)
+                    return Unauthorized(new
+                    {
+                        status = "fail",
+                        message = "Session is not valid"
+                    });
+                purchase.Client = client;
+                _db.AddOrUpdate(purchase);
+                return Ok(new
+                {
+                    status = "ok",       
+                    id = purchase.Id
+                });
+            }
+            catch (Exception E)
+            {
+                return BadRequest(new
                 {
                     status = "fail",
-                    message = "You saved this product."
+                    message = E.Message
                 });
-            _db.AddOrUpdate(purchase);
-            return Ok(new
-            {
-                status = "ok",
-                id = purchase.Id
-            });
-        
+            }
         }
-        */
+
     }
 }
