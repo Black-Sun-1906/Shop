@@ -8,6 +8,16 @@
     <DocumentationFile>Shop_server.xml</DocumentationFile>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Remove="db_setting.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="db_setting.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 	<ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.17" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
