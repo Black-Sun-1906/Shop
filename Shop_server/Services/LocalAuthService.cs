@@ -27,7 +27,9 @@ namespace Shop_server.Servises
         public Guid Auth(string login, string password)
         {
             var passhash = Extensions.ComputeSHA256(password);
-            IAuth potencialUser = _db.GetClients(x => x.Login == login & x.Password == passhash).FirstOrDefault() as IAuth ?? _db.GetManagers(x => x.Login == login & x.Password == passhash).FirstOrDefault() as IAuth ?? throw new Exception("User is not found");
+            IAuth potencialUser = _db.GetClients(x => x.Login == login & x.Password == passhash).FirstOrDefault() as IAuth ??
+                                  _db.GetManagers(x => x.Login == login & x.Password == passhash).FirstOrDefault() as IAuth ??
+                                  throw new Exception("User is not found");
 
             var Token = Guid.NewGuid();
             Sessions.Add(new()

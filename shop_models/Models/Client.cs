@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -12,6 +13,6 @@ namespace shop_models.Models
         [Required] [StringLength(100)] public string Login { get; set; }
         [Required] public string Password { get; set; }
 
-        public virtual ICollection<Purchase> Purchases { get; set; }
+        [JsonIgnore]public virtual ICollection<Purchase> Purchases { get; set; }
     }
 }

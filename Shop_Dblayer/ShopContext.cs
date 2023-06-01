@@ -39,7 +39,6 @@ namespace Shop_Dblayer
                 modelBuilder.Entity(type)
                     .Property(nameof(IEntity.Id))
                     .HasDefaultValueSql("NEWSEQUENTIALID()");
-
         }
     }
 }

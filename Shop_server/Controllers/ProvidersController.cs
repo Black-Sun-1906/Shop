@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 using Shop_dblayer;
+using shop_models.Models;
+using Shop_server.Servises;
 using System;
 using System.Linq;
 
@@ -66,6 +69,35 @@ namespace Shop_server.Controllers
                 status = "ok",
                 products = potentialProvider.Products
             });
+        }
+
+        [HttpPost]
+        public IActionResult PostProvider([FromBody] JObject providerJson)
+        {
+            try
+            {
+                Provider provider = providerJson.ToObject<Provider>();
+                if (LocalAuthService.GetInstance().IsManager(Token))
+                    return Unauthorized(new
+                    {
+                        status = "fail",
+                        message = "Session is not valid"
+                    });                
+                _db.AddOrUpdate(provider);
+                return Ok(new
+                {
+                    status = "ok",
+                    id = provider.Id
+                });
+            }
+            catch (Exception E)
+            {
+                return BadRequest(new
+                {
+                    status = "fail",
+                    message = E.Message
+                });
+            }
         }
     }
 }

@@ -15,7 +15,6 @@ namespace shop_models.Models
         public DateTime Purchases { get; set; }
 
         public virtual Client Client { get; set; }
-        [JsonIgnore]
-        public virtual ICollection<Product> Products { get; set; }
+        [JsonIgnore]        public virtual ICollection<Product> Products { get; set; }
     }
 }
